@@ -63,6 +63,7 @@
     <Compile Include="Rules\IsolationGridRule.cs" />
     <Compile Include="Rules\NineCellSolver.cs" />
     <Compile Include="Rules\ColRule.cs" />
+    <Compile Include="Rules\PairIsolationRule.cs" />
     <Compile Include="Rules\SingleIsolationRule.cs" />
     <Compile Include="Rules\RowRule.cs" />
     <Compile Include="SudokuGrid.cs" />

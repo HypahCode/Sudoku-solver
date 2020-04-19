@@ -48,7 +48,9 @@ namespace SudokuSolver.Rules
                     {
                         if (cell.Possibilities.Numbers.Contains(key))
                         {
-                            cell.SetSolved(key);
+                            cell.Possibilities.Numbers.Clear();
+                            cell.Possibilities.Numbers.Add(key);
+                            //cell.SetSolved(key);
                         }
                     }
                 }

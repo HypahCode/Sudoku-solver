@@ -17,7 +17,7 @@ namespace SudokuSolver
             {
                 rule.SolveStep(grid);                
             }
-            grid.SetSolvedWhereConvinced();
+            //grid.SetSolvedWhereConvinced();
         }
     }
 }

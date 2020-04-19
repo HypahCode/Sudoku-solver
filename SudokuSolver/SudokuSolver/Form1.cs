@@ -18,6 +18,19 @@ namespace SudokuSolver
         {
             InitializeComponent();
 
+            grid.SetFixed(new[] {
+                "000 230 060",
+                "300 005 001",
+                "900 000 700",
+
+                "250 000 080",
+                "090 000 006",
+                "406 500 002",
+
+                "609 300 000",
+                "000 071 000",
+                "003 906 840",
+            });
 
             pictureBox1.Image = DrawSudoku(grid);
 
@@ -26,7 +39,8 @@ namespace SudokuSolver
                 new RowRule(),
                 new ColRule(),
                 new SingleIsolationRule(),
-                new IsolationGridRule()
+                new IsolationGridRule(),
+                new PairIsolationRule()
             });
         }
 
@@ -75,28 +89,25 @@ namespace SudokuSolver
             {
                 g.FillRectangle(new SolidBrush(Color.Yellow), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize));
             }
+            else if ((selectedCells.Count == 1) && (selectedCells[0].Number != 0) && (cell.State == CellState.Unsolved) && (!cell.Possibilities.Numbers.Contains(selectedCells[0].Number)))
+            {
+                g.FillRectangle(new SolidBrush(Color.FromArgb(255, 153, 145)), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize));
+            }
             else
             {
                 switch (cell.State)
                 {
-                    case CellState.FixedNumber:
-                        g.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize));
-                        break;
-                    case CellState.Solved:
-                        g.FillRectangle(new SolidBrush(Color.LightGreen), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize));
-                        break;
-                    case CellState.Unsolved:
-                        break;
-                    case CellState.Error:
-                        g.FillRectangle(new SolidBrush(Color.DarkRed), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize));
-                        break;
+                    case CellState.FixedNumber: g.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize)); break;
+                    case CellState.Solved: g.FillRectangle(new SolidBrush(Color.LightGreen), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize)); break;
+                    case CellState.Unsolved: break;
+                    case CellState.Error: g.FillRectangle(new SolidBrush(Color.DarkRed), new Rectangle(xAbsolute, yAbsolute, gridSize, gridSize)); break;
                 }
             }
 
             if (cell.State == CellState.Unsolved)
             {
                 var font = new Font("Courier new", 8, FontStyle.Bold);
-                g.DrawString(cell.Possibilities.ToString(), font, new SolidBrush(Color.Red), new PointF(xAbsolute + 1, yAbsolute));
+                g.DrawString(cell.Possibilities.ToString(), font, new SolidBrush(Color.DarkGray), new PointF(xAbsolute + 1, yAbsolute + (gridSize - font.Height)));
             }
 
             if (cell.Number != 0)
@@ -179,6 +190,12 @@ namespace SudokuSolver
                     case Keys.F: cell.SetFixed(cell.Number); break;
                 }
             }
+            pictureBox1.Image = DrawSudoku(grid);
+        }
+
+        private void button2_Click(object sender, System.EventArgs e)
+        {
+            grid.SetSolvedWhereConvinced();
             pictureBox1.Image = DrawSudoku(grid);
         }
     }

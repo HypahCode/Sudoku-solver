@@ -9,6 +9,8 @@ namespace SudokuSolver
         public int Width => 9;
         public int Height => 9;
 
+        public bool IsAutoSolvedEnabled { get; set; }
+
         public SudokuGrid()
         {
             for (int i = 0; i < Width * Height; i++)
