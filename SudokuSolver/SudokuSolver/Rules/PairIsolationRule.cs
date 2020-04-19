@@ -46,9 +46,6 @@ namespace SudokuSolver.Rules
             var numCounts = new Dictionary<int, List<NumCounts>>();
             for (int num = 1; num < 10; num++)
             {
-                if (x == 2 && y == 2 && num == 3 || num == 9)
-                    Console.WriteLine("conditional Break-point");
-
                 var cellsCount = GetAllCellsContainingNumber(cells, num);
                 if (cellsCount.Count > 0)
                 {
@@ -62,9 +59,6 @@ namespace SudokuSolver.Rules
                     }
                 }
             }
-
-            if (x == 2 && y == 2)
-                Console.WriteLine("conditional Break-point");
 
             foreach (var kv in numCounts)
             {
@@ -139,20 +133,6 @@ namespace SudokuSolver.Rules
                 {
                     cell.Possibilities.RemoveAllBut(range);
                 }
-
-                /*
-                // Everything seems in order, now kill of all numbers
-                foreach (var cell in cells)
-                {
-                    if (!group.Cells.Contains(cell)) // Not in own cell...
-                    {
-                        foreach (var num in group.Numbers)
-                        {
-                            cell.Possibilities.Numbers.Remove(num);
-                        }
-                    }
-                }
-                */
             }
         }
 

@@ -50,7 +50,6 @@ namespace SudokuSolver.Rules
                         {
                             cell.Possibilities.Numbers.Clear();
                             cell.Possibilities.Numbers.Add(key);
-                            //cell.SetSolved(key);
                         }
                     }
                 }
