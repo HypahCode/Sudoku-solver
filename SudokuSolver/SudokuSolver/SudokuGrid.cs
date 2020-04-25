@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SudokuSolver
 {
@@ -85,6 +86,14 @@ namespace SudokuSolver
                         cell.SetSolved(cell.Possibilities.Numbers[0]);
                     }
                 }
+            }
+        }
+
+        internal void Clear()
+        {
+            foreach (var cell in cells)
+            {
+                cell.SetUnsolved();
             }
         }
     }

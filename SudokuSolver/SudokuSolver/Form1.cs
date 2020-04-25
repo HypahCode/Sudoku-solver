@@ -198,5 +198,11 @@ namespace SudokuSolver
             grid.SetSolvedWhereConvinced();
             pictureBox1.Image = DrawSudoku(grid);
         }
+
+        private void button3_Click(object sender, System.EventArgs e)
+        {
+            grid.Clear();
+            pictureBox1.Image = DrawSudoku(grid);
+        }
     }
 }
